@@ -8,18 +8,20 @@
   <md-card-title>New diary entry</md-card-title>
   <md-card-content>
     <md-input-container>
-      <input type="text" mdInput placeholder="Title" [(ngModel)]="newPost.title">
+      <input #inputText type="text" mdInput placeholder="Title"
+        maxlength="30" [(ngModel)]="newPost.title">
+      <md-hint align="end">{{inputText.value.length}} / 30</md-hint>
     </md-input-container>
     <p>
       <md-input-container>
-        <textarea mdInput name="textarea" rows="10" cols="50" 
-          placeholder="Write something here" maxlength="500"
+        <textarea #textArea mdInput name="textarea" rows="10" cols="50" 
+          placeholder="Write something here"
           [(ngModel)]="newPost.body"></textarea>
       </md-input-container>
     </p>
   </md-card-content>
   <md-card-actions>
-    <button md-icon-button (click)="addPost()"><md-icon>check</md-icon></button>
+    <button md-icon-button mdTooltip="Add post" (click)="addPost()"><md-icon>check</md-icon></button>
   </md-card-actions>
 </md-card>
 
@@ -28,7 +30,9 @@
   <md-card-title>{{post.title}}</md-card-title>
   <md-card-content>{{post.body}}</md-card-content>
   <md-card-actions>
-    <button md-icon-button><md-icon>create</md-icon></button>
-    <button md-icon-button (click)="removePost(post)"><md-icon>delete</md-icon></button>
+    <button md-icon-button mdTooltip="Edit post"><md-icon>create</md-icon></button>
+    <button md-icon-button mdTooltip="Remove post" (click)="removePost(post)"><md-icon>delete</md-icon></button>
+    <button md-icon-button mdTooltip="I like it!"><md-icon>thumb_up</md-icon></button>
+    <button md-icon-button mdTooltip="Argh!"><md-icon>thumb_down</md-icon></button>
   </md-card-actions>
 </md-card>
